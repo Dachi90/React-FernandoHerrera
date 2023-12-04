@@ -1,8 +1,8 @@
 // Fetch API
 
-const apiKey = '';
+const apiKey = 'vQNnTMesEJ0NzzDY6sbsO99kaiy63BaV';
 
-const peticion = fetch(`http://api.giphy.com/v1/gifs/random?api_key=+${apiKey}`);
+const peticion = fetch(`http://api.giphy.com/v1/gifs/random?api_key=${apiKey}`);
 
 peticion
 	.then((resp) => resp.json())
