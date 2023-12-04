@@ -1,3 +1,8 @@
 export const FirstApp = () => {
-	return <h1>Fernando</h1>;
+	return (
+		<>
+			<h1>Fernando</h1>
+			<p>Soy un subtitulo</p>
+		</>
+	);
 };
