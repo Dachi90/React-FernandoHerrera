@@ -7,7 +7,7 @@ exports[`Probando el componente GifItem Debe ahcer match con el snapshot 1`] = `
   >
     <img
       alt="títuloo"
-      src="url"
+      src="https://probando.com/"
     />
     <p>
       títuloo
