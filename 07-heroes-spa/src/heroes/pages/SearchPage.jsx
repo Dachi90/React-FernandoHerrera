@@ -3,14 +3,17 @@ import queryString from 'query-string';
 
 import { useForm } from '../../hooks/useForm';
 import { HeroCard } from '../components';
+import { getHeroesByName } from '../helpers';
 
 export const SearchPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { q = '' } = queryString.parse(location.search);
 
+	const heroes = getHeroesByName(q);
+
 	const { searchText, onInputChange } = useForm({
-		searchText: '',
+		searchText: q,
 	});
 
 	const onSearchSubmit = (event) => {
@@ -41,7 +44,10 @@ export const SearchPage = () => {
 					<div className='alert alert-danger'>
 						No hero with <b>{q}</b>
 					</div>
-					{/* <HeroCard /> */}
+
+					{heroes.map((hero) => (
+						<HeroCard key={hero.id} {...hero} />
+					))}
 				</div>
 			</div>
 		</>
