@@ -3,7 +3,15 @@ import { Navbar } from '../../../src/ui/components/Navbar';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../src/auth/context/AuthContext';
 
+const mockedUseNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+	...jest.requireActual('react-router-dom'),
+	useNavigate: () => mockedUseNavigate,
+}));
+
 describe('Pruebas en <Navbar/>', () => {
+	beforeEach(() => jest.clearAllMocks());
 	const contextValue = {
 		logged: true,
 		user: {
@@ -12,14 +20,6 @@ describe('Pruebas en <Navbar/>', () => {
 		},
 		logout: jest.fn(),
 	};
-	const mockedUseNavigate = jest.fn();
-
-	jest.mock('react-router-dom', () => ({
-		...jest.requireActual('react-router-dom'),
-		useNavigate: () => mockedUseNavigate,
-	}));
-
-	beforeEach(() => jest.clearAllMocks());
 
 	test('Debe de mostrar el nombre del usuario', () => {
 		render(
