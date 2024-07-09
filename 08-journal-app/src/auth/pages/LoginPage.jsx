@@ -1,8 +1,14 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material';
-import { Google } from '@mui/icons-material';
+//import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material';
+import Google from '@mui/icons-material/Google';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 import { startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth';
@@ -113,6 +119,7 @@ export const LoginPage = () => {
 								disabled={isAuthenticating}
 								variant='contained'
 								fullWidth
+								aria-label='google-btn'
 								onClick={onGoogleSignIn}
 							>
 								<Google />
