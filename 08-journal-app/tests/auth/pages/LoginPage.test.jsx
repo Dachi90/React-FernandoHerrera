@@ -5,7 +5,14 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { LoginPage } from '../../../src/auth/pages/LoginPage';
 import { authSlice } from '../../../src/store/auth';
+import { startGoogleSignIn } from '../../../src/store/auth/thunks';
 import { notAuthenticatedState } from '../../fixtures/authFixtures';
+
+const mockStartGoogleSignIn = jest.fn();
+
+jest.mock('../../../src/store/auth/thunks', () => ({
+	startGoogleSignIn: () => mockStartGoogleSignIn,
+}));
 
 const store = configureStore({
 	reducer: {
@@ -37,7 +44,10 @@ describe('Pruebas en el <LoginPage />', () => {
 				</MemoryRouter>
 			</Provider>
 		);
+
 		const googleBtn = screen.getByLabelText('google-btn');
 		fireEvent.click(googleBtn);
+
+		expect(mockStartGoogleSignIn).toHaveBeenCalled();
 	});
 });
