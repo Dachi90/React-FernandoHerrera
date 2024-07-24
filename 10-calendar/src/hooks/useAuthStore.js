@@ -3,7 +3,7 @@ import { calendarApi } from '../api';
 import { clearErrorMessage, onChecking, onLogin, onLogout } from '../store';
 
 export const useAuthStore = () => {
-	const { status, user, erroMessage } = useSelector((state) => state.auth);
+	const { status, user, errorMessage } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
 	const startLogin = async ({ email, password }) => {
@@ -27,7 +27,7 @@ export const useAuthStore = () => {
 		//* Propiedades
 		status,
 		user,
-		erroMessage,
+		errorMessage,
 
 		//* Métodos
 		startLogin,
