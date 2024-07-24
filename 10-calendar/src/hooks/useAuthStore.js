@@ -30,13 +30,28 @@ export const useAuthStore = () => {
 			const { data } = await calendarApi.post('/auth/new', { email, password, name });
 			localStorage.setItem('token', data.token);
 			localStorage.setItem('token-init-date', new Date().getTime());
-
 			dispatch(onLogin({ name: data.name, uid: data.uid }));
 		} catch (error) {
 			dispatch(onLogout(error.response.data?.msg || '---'));
 			setTimeout(() => {
 				dispatch(clearErrorMessage());
 			}, 10);
+		}
+	};
+
+	const checkAuthToken = async () => {
+		const token = localStorage.getItem('token');
+		if (!token) return dispatch(onLogout());
+
+		try {
+			const { data } = await calendarApi.get('auth/renew');
+			console.log(data);
+			localStorage.setItem('token', data.token);
+			localStorage.setItem('token-init-date', new Date().getTime());
+			dispatch(onLogin({ name: data.name, uid: data.uid }));
+		} catch (error) {
+			localStorage.clear();
+			dispatch(onLogout());
 		}
 	};
 
@@ -47,6 +62,7 @@ export const useAuthStore = () => {
 		errorMessage,
 
 		//* Métodos
+		checkAuthToken,
 		startLogin,
 		startRegister,
 	};
